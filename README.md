@@ -48,10 +48,10 @@ This is a Flask web application that performs sentiment analysis on user-provide
     ```
 
 2. **Access the web interface**:
-    Open your web browser and go to `http://127.0.0.1:5000/`.
+    Open your web browser and go to `http://127.0.0.1:5001/`.
 
 3. **Use the API endpoint**:
-    - Send a POST request to `http://127.0.0.1:5000/predict` with a JSON body containing the text to analyze.
+    - Send a POST request to `http://127.0.0.1:5001/predict` with a JSON body containing the text to analyze.
     ```bash
     curl -X POST http://127.0.0.1:5000/predict -H "Content-Type: application/json" -d '{"text": "Your text here"}'
     ```
