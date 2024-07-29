@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 
-import sentiment_model as model
+import app.sentiment_model as model
 
 app = Flask(__name__)
 

@@ -6,12 +6,14 @@ name = "pypi"
 [packages]
 flask = "*"
 tensorflow = "*"
-scikit-learn = "*"
+symspellpy = "*"
+gunicorn = "*"
+pytest = "*"
+
+[dev-packages]
 matplotlib = "*"
 numpy = "*"
 pandas = "*"
-
-[dev-packages]
 ipykernel = "*"
 
 [requires]
