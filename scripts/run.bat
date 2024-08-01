@@ -1,38 +1,21 @@
 @echo off
 
-REM Function to check if Docker is installed
-:check_docker
-docker --version >nul 2>&1
-IF %ERRORLEVEL% NEQ 0 (
-    echo Docker is not installed. Please install Docker.
-    exit /b 1
-)
-exit /b 0
-
-REM Check if Docker is available
-call :check_docker
-
-REM Define the image name
-set IMAGE_NAME=sentiment_sense
-
-REM Step 1: Build the Docker image
-echo Building the Docker image...
-docker build -t %IMAGE_NAME% .
-
-REM Check if the image was built successfully
-IF %ERRORLEVEL% NEQ 0 (
-    echo Failed to build the Docker image.
-    exit /b 1
+:: Step 1: Install pip if not already installed
+where pip >nul 2>nul
+if %ERRORLEVEL% NEQ 0 (
+    echo pip could not be found, installing...
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    python get-pip.py
+    del get-pip.py
+) else (
+    echo pip is already installed
 )
 
-REM Step 2: Run the Docker container
-echo Running the Docker container...
-docker run -d -p 5001:5001 --name sentiment_sense_container %IMAGE_NAME%
+:: Step 2: Install pipenv using pip
+pip install pipenv
 
-REM Check if the container is running
-IF %ERRORLEVEL% NEQ 0 (
-    echo Failed to run the Docker container.
-    exit /b 1
-)
+:: Step 3: Install dependencies from Pipfile
+pipenv install
 
-echo Docker container is running and accessible at http://localhost:5001
+:: Step 4: Run the Flask app
+pipenv run python app\app.py
